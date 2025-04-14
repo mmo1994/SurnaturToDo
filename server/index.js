@@ -13,8 +13,7 @@ const PORT = process.env.PORT || 5000;
 
 // CORS configuration
 const corsOptions = {
-	origin: '*', // Allow all origins
-	credentials: true,
+	origin: '*',
 	optionsSuccessStatus: 200
 };
 
