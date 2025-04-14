@@ -18,7 +18,7 @@ const corsOptions = {
 		: 'http://localhost:3000',
 	credentials: true,
 	optionsSuccessStatus: 200
-};
+}; 
 
 // Middleware
 app.use(cors(corsOptions));
