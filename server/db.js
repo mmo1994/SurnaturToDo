@@ -6,10 +6,7 @@ dotenv.config();
 // Use connection string if available, otherwise use individual parameters
 const pool = process.env.DATABASE_URL
 	? new Pool({
-		connectionString: process.env.DATABASE_URL,
-		ssl: {
-			rejectUnauthorized: false // Fixes the self-signed certificate issue
-		}
+		connectionString: process.env.DATABASE_URL
 	})
 	: new Pool({
 		user: process.env.DB_USER,
