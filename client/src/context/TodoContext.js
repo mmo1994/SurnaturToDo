@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useAuth } from './AuthContext';
 
 const TodoContext = createContext();
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 export const useTodos = () => useContext(TodoContext);
 
@@ -47,7 +48,7 @@ export const TodoProvider = ({ children }) => {
 	const getTodos = useCallback(async () => {
 		setLoading(true);
 		try {
-			const res = await axios.get('http://localhost:5000/api/todos');
+			const res = await axios.get(`${API_URL}/todos`);
 			setTodos(res.data.sort((a, b) => a.position - b.position));
 			setError(null);
 		} catch (err) {
@@ -74,7 +75,7 @@ export const TodoProvider = ({ children }) => {
 	// Add todo
 	const addTodo = async (todo) => {
 		try {
-			const res = await axios.post('http://localhost:5000/api/todos', todo);
+			const res = await axios.post(`${API_URL}/todos`, todo);
 			setTodos([...todos, res.data]);
 			return res.data;
 		} catch (err) {
@@ -86,7 +87,7 @@ export const TodoProvider = ({ children }) => {
 	// Delete todo
 	const deleteTodo = async (id) => {
 		try {
-			await axios.delete(`http://localhost:5000/api/todos/${id}`);
+			await axios.delete(`${API_URL}/todos/${id}`);
 			setTodos(todos.filter(todo => todo.id !== id));
 			return true;
 		} catch (err) {
@@ -98,7 +99,7 @@ export const TodoProvider = ({ children }) => {
 	// Update todo
 	const updateTodo = async (id, updates) => {
 		try {
-			const res = await axios.put(`http://localhost:5000/api/todos/${id}`, updates);
+			const res = await axios.put(`${API_URL}/todos/${id}`, updates);
 			setTodos(todos.map(todo => (todo.id === id ? res.data : todo)));
 			return res.data;
 		} catch (err) {
@@ -124,7 +125,7 @@ export const TodoProvider = ({ children }) => {
 				position: index
 			}));
 
-			const res = await axios.put('http://localhost:5000/api/todos/reorder', { updates });
+			const res = await axios.put(`${API_URL}/todos/reorder`, { updates });
 
 			// Update local state with the new order
 			const updatedTodos = res.data.sort((a, b) => a.position - b.position);
