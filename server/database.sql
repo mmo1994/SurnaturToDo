@@ -1,0 +1,25 @@
+CREATE DATABASE surnatur_todo;
+-- Connect to the database
+-- Users table
+CREATE TABLE users (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(100) NOT NULL,
+	email VARCHAR(100) NOT NULL UNIQUE,
+	password VARCHAR(255) NOT NULL,
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+-- Todo items table
+CREATE TABLE todos (
+	id SERIAL PRIMARY KEY,
+	user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+	title VARCHAR(255) NOT NULL,
+	description TEXT,
+	due_date TIMESTAMP WITH TIME ZONE,
+	is_completed BOOLEAN DEFAULT FALSE,
+	position INTEGER,
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+-- Index to improve query performance
+CREATE INDEX todos_user_id_idx ON todos(user_id);

@@ -1,0 +1,116 @@
+.profile-container {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	min-height: calc(100vh - 80px);
+	padding: 3rem 0;
+}
+
+.profile-card {
+	width: 100%;
+	max-width: 600px;
+	background-color: #ffffff;
+	border-radius: 10px;
+	box-shadow: var(--box-shadow);
+	padding: 2.5rem;
+	transition: transform 0.3s ease;
+}
+
+.profile-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.profile-title {
+	font-size: 2rem;
+	font-weight: 700;
+	color: var(--primary-color);
+	margin-bottom: 0.5rem;
+	text-align: center;
+}
+
+.profile-subtitle {
+	font-size: 1rem;
+	color: #666;
+	margin-bottom: 2rem;
+	text-align: center;
+}
+
+.profile-form {
+	margin-bottom: 1.5rem;
+}
+
+.password-section {
+	margin-top: 2rem;
+	padding-top: 1.5rem;
+	border-top: 1px solid #eee;
+}
+
+.password-title {
+	font-size: 1.2rem;
+	font-weight: 600;
+	color: var(--dark-color);
+	margin-bottom: 0.5rem;
+}
+
+.password-subtitle {
+	font-size: 0.9rem;
+	color: #666;
+	margin-bottom: 1.5rem;
+}
+
+.profile-actions {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 2rem;
+}
+
+.profile-actions button {
+	flex: 1;
+	margin: 0 0.5rem;
+}
+
+.profile-actions button:first-child {
+	margin-left: 0;
+}
+
+.profile-actions button:last-child {
+	margin-right: 0;
+}
+
+.account-info {
+	margin-top: 2rem;
+	padding-top: 1.5rem;
+	border-top: 1px solid #eee;
+	font-size: 0.9rem;
+	color: #666;
+	text-align: center;
+}
+
+/* Loader */
+.loader {
+	border: 4px solid #f3f3f3;
+	border-top: 4px solid var(--primary-color);
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	margin: 3rem auto;
+	animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+@media (max-width: 650px) {
+	.profile-card {
+		padding: 2rem 1.5rem;
+		margin: 0 1rem;
+	}
+}

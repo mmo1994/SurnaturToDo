@@ -1,0 +1,51 @@
+.todo-form-container {
+	background-color: #ffffff;
+	border-radius: 8px;
+	box-shadow: var(--box-shadow);
+	padding: 1.5rem;
+	margin-bottom: 2rem;
+	animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+	from {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.todo-form {
+	display: flex;
+	flex-direction: column;
+}
+
+.todo-form .form-group {
+	margin-bottom: 1.2rem;
+}
+
+.todo-form .form-control {
+	transition: all var(--transition-speed) ease;
+	border: 1px solid #ddd;
+}
+
+.todo-form .form-control:focus {
+	box-shadow: 0 0 0 3px rgba(92, 107, 192, 0.2);
+	border-color: var(--primary-color);
+}
+
+.form-actions {
+	display: flex;
+	justify-content: flex-end;
+	gap: 1rem;
+	margin-top: 1rem;
+}
+
+.todo-form textarea {
+	resize: vertical;
+	min-height: 100px;
+}
