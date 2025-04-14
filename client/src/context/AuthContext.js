@@ -2,7 +2,7 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 
 const AuthContext = createContext();
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api/';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 export const useAuth = () => useContext(AuthContext);
 
@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
 				setAuthToken(localStorage.getItem('token'));
 
 				try {
-					const res = await axios.get(`${API_URL}auth`);
+					const res = await axios.get(`${API_URL}/auth`);
 					setUser(res.data);
 					setIsAuthenticated(true);
 				} catch (err) {
@@ -46,13 +46,13 @@ export const AuthProvider = ({ children }) => {
 	// Register User
 	const register = async (formData) => {
 		try {
-			const res = await axios.post(`${API_URL}auth/register`, formData);
+			const res = await axios.post(`${API_URL}/auth/register`, formData);
 
 			localStorage.setItem('token', res.data.token);
 			setAuthToken(res.data.token);
 
 			// Get user data
-			const userRes = await axios.get(`${API_URL}auth`);
+			const userRes = await axios.get(`${API_URL}/auth`);
 			setUser(userRes.data);
 			setIsAuthenticated(true);
 			setError(null);
@@ -67,13 +67,13 @@ export const AuthProvider = ({ children }) => {
 	// Login User
 	const login = async (formData) => {
 		try {
-			const res = await axios.post(`${API_URL}auth/login`, formData);
+			const res = await axios.post(`${API_URL}/auth/login`, formData);
 
 			localStorage.setItem('token', res.data.token);
 			setAuthToken(res.data.token);
 
 			// Get user data
-			const userRes = await axios.get(`${API_URL}auth`);
+			const userRes = await axios.get(`${API_URL}/auth`);
 			setUser(userRes.data);
 			setIsAuthenticated(true);
 			setError(null);
@@ -96,7 +96,7 @@ export const AuthProvider = ({ children }) => {
 	// Update User
 	const updateUser = async (formData) => {
 		try {
-			const res = await axios.put(`${API_URL}users/${user.id}`, formData);
+			const res = await axios.put(`${API_URL}/users/${user.id}`, formData);
 			setUser(res.data);
 			setError(null);
 			return true;

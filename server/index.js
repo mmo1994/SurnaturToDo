@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
@@ -10,31 +11,17 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Custom CORS middleware
-app.use((req, res, next) => {
-	//process.env.FRONTEND_URL
-	// Allow specific origins or use * for development
-	const allowedOrigins = ['https://surnatur-to-do.vercel.app', 'http://localhost:3000'];
-	const origin = req.headers.origin;
-
-	if (allowedOrigins.includes(origin)) {
-		res.setHeader('Access-Control-Allow-Origin', origin);
-	}
-
-	// Allow specific headers and methods
-	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-	res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-auth-token');
-	res.setHeader('Access-Control-Allow-Credentials', 'true');
-
-	// Handle preflight requests
-	if (req.method === 'OPTIONS') {
-		return res.status(200).end();
-	}
-
-	next();
-});
+// CORS configuration
+const corsOptions = {
+	origin: process.env.NODE_ENV === 'production'
+		? [process.env.FRONTEND_URL, process.env.BACKEND_URL]
+		: 'http://localhost:3000',
+	credentials: true,
+	optionsSuccessStatus: 200
+};
 
 // Middleware
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Simple request logger
