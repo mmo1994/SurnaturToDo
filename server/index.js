@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 // CORS configuration
 const corsOptions = {
 	origin: process.env.NODE_ENV === 'production'
-		? [process.env.FRONTEND_URL, process.env.BACKEND_URL]
+		? process.env.ALLOWED_URLS.split(";")
 		: 'http://localhost:3000',
 	credentials: true,
 	optionsSuccessStatus: 200
