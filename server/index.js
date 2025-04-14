@@ -1,5 +1,4 @@
 const express = require('express');
-const cors = require('cors');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
@@ -11,17 +10,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// CORS configuration
-const corsOptions = {
-	origin: process.env.NODE_ENV === 'production'
-		? [process.env.FRONTEND_URL, process.env.BACKEND_URL]
-		: 'http://localhost:3000',
-	credentials: true,
-	optionsSuccessStatus: 200
-};
-
 // Middleware
-app.use(cors(corsOptions));
 app.use(express.json());
 
 // Simple request logger
